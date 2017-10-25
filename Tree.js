@@ -1,11 +1,12 @@
 var TreeNode = require("./TreeNode.js");
 
 function Tree() {
-    this.root = null
+  this.root = null;
 }
 
 Tree.prototype = {
   
+  // Generate a random tree
   generate : function(numNodes, numColours) {
 
     var stack = [];
@@ -34,6 +35,41 @@ Tree.prototype = {
         stack.push([curNode[0].rightChild, value+1, max]);
       }
     }
+  },
+
+  destroy: function() {
+    this.root = null;
+    // var stack = [];
+
+    // stack.push(this.root);
+
+    // while (stack.length > 0) {
+    //   var curNode = stack.pop();
+    //     curNode.leftChild ? stack.push(curNode.leftChild) : null;
+    //     curNode.rightChild ? stack.push(curNode.rightChild) : null;
+    //     curNode = null;
+    //     console.log("null")
+    // }
+  },
+
+  findAllLeaves : function() {
+    var stack = [];
+    var leaves = [];
+  
+    if (this.root) {
+      stack.push(this.root);
+
+      while (stack.length > 0) {
+        var curNode = stack.pop();
+        if (!curNode.leftChild && !curNode.rightChild) {
+          leaves.push({value: curNode.value, colour: curNode.colour});
+        } else {
+          curNode.leftChild ? stack.push(curNode.leftChild) : null;
+          curNode.rightChild ? stack.push(curNode.rightChild) : null;
+        }
+      }
+    }
+    return leaves;
   },
 
   print : function() {
