@@ -35,18 +35,18 @@ Tree.prototype.generate = function(numNodes) {
 
 Tree.prototype.print = function() {
   var nodes = {};
-  var curLevel = 0;
   var stack = [];
 
-  stack.push(this.root);
+  stack.push([this.root, 0]);
 
   while (stack.length > 0) {
-    var curNode = stack.pop();
+    var curParams = stack.pop();
+    var curNode = curParams[0];
+    var curLevel = curParams[1];
     nodes[curNode.value] = curLevel;
-    curLevel++;
 
-    curNode.leftChild ? stack.push(curNode.leftChild) : null;
-    curNode.rightChild ? stack.push(curNode.rightChild) : null;
+    curNode.leftChild ? stack.push([curNode.leftChild, curLevel+1]) : null;
+    curNode.rightChild ? stack.push([curNode.rightChild, curLevel+1]) : null;
   }
 
   for (value in nodes) {
@@ -54,13 +54,6 @@ Tree.prototype.print = function() {
     console.log(str);
   }
 }
-
-// Tree.prototype.getNodeInfo = function(curNode, curLevel) {
-//   nodes[curNode.value] = curLevel;
-
-//   this.getNodeInfo(curNode.leftChild, curLevel+1);
-//   this.getNodeInfo(curNode.rightChild, curLevel+1);
-// }
 
 module.exports = Tree;
 

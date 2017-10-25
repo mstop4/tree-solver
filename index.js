@@ -2,11 +2,8 @@
 
 var Tree = require("./Tree.js");
 
-console.log("hello world");
+console.log("happy little trees");
 
 var tree = new Tree();
-tree.generate(5);
-
-console.dir(tree);
-
+tree.generate(50);
 tree.print();
