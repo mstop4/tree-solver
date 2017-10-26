@@ -6,7 +6,6 @@ console.log("happy little trees");
 
 var tree = new Tree();
 tree.generate(50,5);
+tree.print();
 console.dir(tree.findAllLeaves());
-tree.destroy();
-console.dir(tree);
-console.dir(tree.findAllLeaves());
+console.dir(tree.findPenultimateNodes());

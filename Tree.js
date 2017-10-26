@@ -62,7 +62,7 @@ Tree.prototype = {
       while (stack.length > 0) {
         var curNode = stack.pop();
         if (!curNode.leftChild && !curNode.rightChild) {
-          leaves.push({value: curNode.value, colour: curNode.colour});
+          leaves.push(curNode.value);
         } else {
           curNode.leftChild ? stack.push(curNode.leftChild) : null;
           curNode.rightChild ? stack.push(curNode.rightChild) : null;
@@ -70,6 +70,27 @@ Tree.prototype = {
       }
     }
     return leaves;
+  },
+
+  findPenultimateNodes : function() {
+    var penultimates = [];
+    
+    if (this.root) {
+      traverse(this.root, []);
+    }
+
+    return penultimates;
+
+    function traverse(curNode, trace) {
+      if (!curNode.leftChild && ! curNode.rightChild &&
+          trace[trace.length-1] && !penultimates.includes(trace[trace.length-1].value)) {
+        penultimates.push(trace[trace.length-1].value);
+      } else {
+        trace.push(curNode);
+        curNode.leftChild ? traverse(curNode.leftChild, trace) : null;
+        curNode.rightChild ? traverse(curNode.rightChild, trace) : null;
+      }
+    }
   },
 
   print : function() {
